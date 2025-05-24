@@ -5,8 +5,7 @@ This project is designed to ingest, transform, and analyze Adventure Works data 
 ---
 
 ## 📁 Project Architecture
-https://github.com/Nareshmaila7/Adventure-Works-Azure-Data-Engineering-Project/blob/4c0ccd73d8990e2441fb59204dbc6469685152a5/Project%20Architecture.png
-
+![Project Architecture](https://github.com/user-attachments/assets/5522c3a7-6fb2-4a03-abd4-8a29da7c2a7e)
 **Medallion Architecture Layers:**
 
 - **Bronze Layer:** Raw data ingested via REST API using ADF, dynamically parameterized to fetch Adventure Works data.
