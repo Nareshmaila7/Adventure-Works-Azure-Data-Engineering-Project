@@ -1,4 +1,4 @@
-# 🏢 Adventure Works Data Engineering with Azure Data Platform
+# 🏢 Adventure-Works-Azure-Data-Engineering-Project
 
 This project is designed to ingest, transform, and analyze Adventure Works data using Azure Data Factory (ADF), Azure Data Lake Storage (ADLS), Azure Databricks, Azure Synapse Analytics, and Power BI. The pipeline follows a Medallion Architecture (Bronze, Silver, Gold) to ensure data quality, reliability, and effective reporting.
 
