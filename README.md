@@ -1,84 +1,79 @@
-🏢 Adventure Works Data Engineering Project with Azure Data Platform
-This project demonstrates a complete data engineering pipeline using the Adventure Works dataset. It involves ingestion, transformation, storage, and reporting using Azure Data Factory (ADF), Azure Data Lake Storage Gen2 (ADLS), Azure Databricks, Azure Synapse Analytics, and Power BI. The solution is built on a Medallion Architecture to ensure scalability, security, and efficient data processing.
+# 🏢 Adventure Works Data Engineering with Azure Data Platform
 
-📁 Project Architecture
-Medallion Architecture Layers:
-Bronze Layer: Raw data ingested from REST API into ADLS via ADF.
+This project is designed to ingest, transform, and analyze Adventure Works data using Azure Data Factory (ADF), Azure Data Lake Storage (ADLS), Azure Databricks, Azure Synapse Analytics, and Power BI. The pipeline follows a Medallion Architecture (Bronze, Silver, Gold) to ensure data quality, reliability, and effective reporting.
 
-Silver Layer: Cleaned and transformed data stored in structured formats.
+---
 
-Gold Layer: Aggregated and curated data ready for business intelligence.
+## 📁 Project Architecture
 
-⚙️ Tech Stack
-Azure Data Factory (ADF): Orchestrates and automates REST API data ingestion workflows using dynamic parameters.
+**Medallion Architecture Layers:**
 
-Azure Data Lake Storage Gen2 (ADLS): Stores raw, cleaned, and curated datasets across Bronze, Silver, and Gold containers.
+- **Bronze Layer:** Raw data ingested via REST API using ADF, dynamically parameterized to fetch Adventure Works data.
+- **Silver Layer:** Cleaned and transformed data using Azure Databricks and stored in a curated Silver container.
+- **Gold Layer:** Final processed data published to Azure Synapse and exported for reporting and analysis in Power BI.
 
-Azure Databricks: Performs transformations on raw data using PySpark and writes results back in optimized Delta format.
+---
 
-Azure Synapse Analytics: Consumes transformed data and creates external tables/views for fast query performance.
+## ⚙️ Tech Stack
 
-Power BI: Builds real-time, interactive dashboards for analytics and business reporting.
+- **Azure Data Factory (ADF):** For REST API-based ingestion and orchestration workflows.
+- **Azure Data Lake Storage Gen2 (ADLS):** For Bronze, Silver, and Gold layer storage.
+- **Azure Databricks:** For scalable data transformation using PySpark and Delta Lake.
+- **Azure Synapse Analytics:** For external table creation and data modeling on curated data.
+- **Power BI:** For dashboarding and business insights visualization.
+- **Service Principal Authentication:** For secure access between ADF, ADLS, and Databricks.
 
-Service Principal Authentication: Secures access between ADF, Databricks, and ADLS.
+---
 
-🔄 Data Flow
-Data Source:
-Adventure Works data is dynamically fetched via REST API using ADF pipelines.
+## 🔄 Data Flow
 
-Bronze Layer (ADF):
-ADF dynamically pulls raw data through REST API calls.
+1. **Data Ingestion (ADF + REST API)**  
+   - REST API endpoint dynamically parameterized.
+   - ADF pipelines fetch and land data into the **Bronze** container in ADLS.
 
-A ForEach loop iterates through datasets, loads them into Bronze container in ADLS using Copy Activity.
+2. **Bronze to Silver (Databricks)**  
+   - Raw data from Bronze is read in Azure Databricks.
+   - Data transformations applied using PySpark (filtering, aggregation, joins, etc.).
+   - Transformed data stored in the **Silver** layer of ADLS.
 
-Silver Layer (Azure Databricks):
-Databricks reads raw data from Bronze layer.
+3. **Silver to Gold (Databricks → Synapse)**  
+   - Silver data further refined and loaded into **Azure Synapse Analytics**.
+   - Views and external Delta tables created for reporting.
+   - Data also written to the **Gold** container in ADLS.
 
-Performs cleaning, joins, filtering, partitioning, and reshaping using PySpark.
+4. **Reporting (Power BI)**  
+   - Power BI connects to Synapse tables and Gold layer Delta files.
+   - Interactive dashboards created for analytics and decision-making.
 
-Writes transformed data to Silver container in Delta format.
+---
 
-Gold Layer (Databricks + Synapse):
-Refined business logic applied in Databricks for aggregations and KPIs.
+## 🧱 Components
 
-Final datasets written in Gold container and made queryable via Synapse external tables and views.
+### Azure Data Factory (ADF)
+- Pipelines calling REST API with dynamic parameters.
+- Copy activities to ingest data into ADLS.
+- Linked services and datasets configured for secure API and storage access.
 
-Reporting (Power BI):
-Power BI connects to Synapse external tables for live dashboarding.
+### Azure Data Lake Storage (ADLS)
+- Containers: `bronze/`, `silver/`, `gold/` implementing Medallion architecture.
+- Serves as the central data lake for raw and processed data.
 
-Enables real-time insights on Adventure Works sales, customers, products, and orders.
+### Azure Databricks
+- Notebooks developed for:
+  - Reading data from Bronze.
+  - Performing filtering, joins, aggregations, and complex transformations.
+  - Writing output to Silver and Gold containers in Delta format.
 
-🧱 Components
-Azure Data Factory
-Pipelines with dynamic REST API calls
+### Azure Synapse Analytics
+- Created external Delta tables and views on Silver data.
+- Used for enterprise-scale querying and BI connectivity.
 
-ForEach loops + Copy Activity
+### Power BI
+- Connected to Synapse and Gold Delta files.
+- Designed dashboards and reports for data insights.
 
-Parameterized Linked Services, Datasets
+---
 
-Monitoring, alerts, and scheduled triggers
+## 📌 Summary
 
-Azure Data Lake Storage Gen2
-Containers for: bronze/, silver/, gold/
-
-Stores all raw, intermediate, and refined data
-
-Azure Databricks
-Notebooks for:
-
-Data reading and writing to/from ADLS
-
-Data transformations using PySpark
-
-Writing in Delta format
-
-Azure Synapse Analytics
-External tables/views over Delta format files
-
-SQL-based reporting queries
-
-Power BI
-Connected to Synapse for data visualization
-
-Real-time reporting on business metrics
-
+This project showcases an end-to-end data engineering solution on Azure with modular architecture. It automates ingestion, enables scalable transformation with PySpark, supports enterprise reporting, and aligns with real-world cloud data lake best practices.
