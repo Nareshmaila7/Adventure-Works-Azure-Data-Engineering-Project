@@ -5,7 +5,7 @@ This project is designed to ingest, transform, and analyze Adventure Works data 
 ---
 
 ## 📁 Project Architecture
-![Project Architecture]https://github.com/Nareshmaila7/Adventure-Works-Azure-Data-Engineering-Project/blob/e033110758e127e93de21afff355b3eb68710e11/Project%20Architecture.png
+https://github.com/Nareshmaila7/Adventure-Works-Azure-Data-Engineering-Project/blob/4c0ccd73d8990e2441fb59204dbc6469685152a5/Project%20Architecture.png
 
 **Medallion Architecture Layers:**
 
