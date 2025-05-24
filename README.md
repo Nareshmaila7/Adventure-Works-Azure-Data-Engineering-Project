@@ -1,77 +1,84 @@
-🏭 Adventure Works Data Engineering Project with Azure Data Platform
-This project ingests, transforms, and analyzes Adventure Works enterprise data using Azure Data Factory (ADF), Azure Data Lake Storage Gen2 (ADLS), Azure Databricks, Azure Synapse Analytics, and Power BI. It implements a Medallion Architecture (Bronze, Silver, Gold) for scalable, reliable, and maintainable data processing.
+🏢 Adventure Works Data Engineering Project with Azure Data Platform
+This project demonstrates a complete data engineering pipeline using the Adventure Works dataset. It involves ingestion, transformation, storage, and reporting using Azure Data Factory (ADF), Azure Data Lake Storage Gen2 (ADLS), Azure Databricks, Azure Synapse Analytics, and Power BI. The solution is built on a Medallion Architecture to ensure scalability, security, and efficient data processing.
 
-📁 Project Architecture:
-
-![Project Architecture]https://github.com/Nareshmaila7/Adventure-Works-Azure-Data-Engineering-Project/blob/060875cbfea115d2d6d8ad0e5613db85dd38947c/Project%20Architecture.png
-
+📁 Project Architecture
 Medallion Architecture Layers:
-Bronze Layer: Raw data ingested dynamically from the Adventure Works REST API endpoint into ADLS Gen2.
+Bronze Layer: Raw data ingested from REST API into ADLS via ADF.
 
-Silver Layer: Cleaned, transformed data using Azure Databricks and PySpark for refined analytics.
+Silver Layer: Cleaned and transformed data stored in structured formats.
 
-Gold Layer: Curated and modeled data stored in ADLS and Azure Synapse Analytics, optimized for reporting and BI.
+Gold Layer: Aggregated and curated data ready for business intelligence.
 
+⚙️ Tech Stack
+Azure Data Factory (ADF): Orchestrates and automates REST API data ingestion workflows using dynamic parameters.
 
-⚙️ Tech Stack:
-Azure Data Factory (ADF): Orchestrates data ingestion and pipeline automation.
+Azure Data Lake Storage Gen2 (ADLS): Stores raw, cleaned, and curated datasets across Bronze, Silver, and Gold containers.
 
-Azure Data Lake Storage Gen2 (ADLS): Stores raw and processed datasets across Medallion layers.
+Azure Databricks: Performs transformations on raw data using PySpark and writes results back in optimized Delta format.
 
-Azure Databricks: Executes scalable data transformations with PySpark, applying business logic and optimizations.
+Azure Synapse Analytics: Consumes transformed data and creates external tables/views for fast query performance.
 
-Azure Synapse Analytics: Hosts external tables and views for SQL-based analytics and fast querying.
+Power BI: Builds real-time, interactive dashboards for analytics and business reporting.
 
-Power BI: Provides interactive dashboards and real-time reporting connected to Synapse.
+Service Principal Authentication: Secures access between ADF, Databricks, and ADLS.
 
-Service Principal Authentication: Securely manages access between ADF, Databricks, and ADLS.
+🔄 Data Flow
+Data Source:
+Adventure Works data is dynamically fetched via REST API using ADF pipelines.
 
+Bronze Layer (ADF):
+ADF dynamically pulls raw data through REST API calls.
 
-🔄 Data Flow:
-Data Source
-Adventure Works data pulled dynamically through REST API calls with parameterized pipelines in Azure Data Factory.
+A ForEach loop iterates through datasets, loads them into Bronze container in ADLS using Copy Activity.
 
-Bronze Layer (ADF)
-ADF pipelines ingest raw data into the Bronze container in ADLS Gen2, maintaining immutable raw data.
+Silver Layer (Azure Databricks):
+Databricks reads raw data from Bronze layer.
 
-Silver Layer (Databricks)
-Databricks reads raw data from Bronze.
+Performs cleaning, joins, filtering, partitioning, and reshaping using PySpark.
 
-Performs cleaning, filtering, joins, repartitioning, and other transformations.
+Writes transformed data to Silver container in Delta format.
 
-Writes cleaned data to the Silver container in ADLS.
+Gold Layer (Databricks + Synapse):
+Refined business logic applied in Databricks for aggregations and KPIs.
 
-Gold Layer (Synapse + ADLS)
-Further aggregation and modeling done in Azure Synapse Analytics.
+Final datasets written in Gold container and made queryable via Synapse external tables and views.
 
-External tables and views created on Silver data for optimized SQL querying.
+Reporting (Power BI):
+Power BI connects to Synapse external tables for live dashboarding.
 
-Curated data saved in Gold container on ADLS.
+Enables real-time insights on Adventure Works sales, customers, products, and orders.
 
-Reporting (Power BI)
-Power BI connects to Synapse to build dynamic dashboards and business reports for insights.
+🧱 Components
+Azure Data Factory
+Pipelines with dynamic REST API calls
 
+ForEach loops + Copy Activity
 
-🧱 Components:
-Azure Data Factory: Parameterized pipelines with REST API integration, monitoring, triggers, and alerts.
+Parameterized Linked Services, Datasets
 
-ADLS Gen2: Organized storage in bronze/, silver/, and gold/ folders following Medallion Architecture.
+Monitoring, alerts, and scheduled triggers
 
-Azure Databricks: PySpark notebooks for data transformation, optimization, and Delta Lake storage.
+Azure Data Lake Storage Gen2
+Containers for: bronze/, silver/, gold/
 
-Azure Synapse Analytics: SQL scripts for modeling and external table creation.
+Stores all raw, intermediate, and refined data
 
-Power BI: Interactive reports connected to Synapse SQL pools.
+Azure Databricks
+Notebooks for:
 
+Data reading and writing to/from ADLS
 
-🎯 Key Achievements:
-Built scalable, reusable data pipelines using Azure services.
+Data transformations using PySpark
 
-Implemented Medallion Architecture for reliable data layering.
+Writing in Delta format
 
-Enhanced performance with Spark tuning (broadcast joins, repartitioning).
+Azure Synapse Analytics
+External tables/views over Delta format files
 
-Enabled real-time BI reporting with Power BI connected to Synapse.
+SQL-based reporting queries
 
-Secured data access via service principal authentication across Azure resources.
+Power BI
+Connected to Synapse for data visualization
+
+Real-time reporting on business metrics
 
